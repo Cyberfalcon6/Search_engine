@@ -11,7 +11,10 @@ while(choice != 3):
         if(url == "https://brs.rdb.rw/busregonline/ESignature/GetDetailsFromNIDA?IDdocument=ID&Country=1003&IDdocumentNo="):
             url = "https://brs.rdb.rw/busregonline/ESignature/GetDetailsFromNIDA?IDdocument=ID&Country=1003&IDdocumentNo=1200280222231012"
     
-        res = requests.get(url)
+        try:
+            res = requests.get(url)
+        except requests.exceptions.SSLError:
+            res = requests.get(url, verify=False)
         soup = BeautifulSoup(res.text, "html.parser")
         Needed_information = ['IDdocumentNo','Name','ProvinceName','LastName','DistrictName','Gender','SectorName','DateOfBirth','CellName','VillageName','Streetname']
         for tag in soup.find_all():
@@ -31,7 +34,7 @@ while(choice != 3):
          term = term.replace(" ","+")
          url = ["https://www.google.com/search?q="+term+"&sxsrf=AJOqlzWbZhBOERB6ACmY6z-A1trOAj6I0g:1676184468546&ei=lIvoY6TdINS7kdUPmr2a0AE&start=20&sa=N&ved=2ahUKEwik98zesY_9AhXUXaQEHZqeBho4ChDw0wN6BAgEEBc&biw=1280&bih=600&dpr=1","https://www.google.com/search?q="+term+"&sxsrf=AJOqlzWbZhBOERB6ACmY6z-A1trOAj6I0g:1676184468546&ei=lIvoY6TdINS7kdUPmr2a0AE&start=20&sa=N&ved=2ahUKEwik98zesY_9AhXUXaQEHZqeBho4ChDw0wN6BAgEEBc&biw=1280&bih=600&dpr=1","https://www.google.com/search?q="+term+"&sxsrf=AJOqlzWbZhBOERB6ACmY6z-A1trOAj6I0g:1676184468546&ei=lIvoY6TdINS7kdUPmr2a0AE&start=20&sa=N&ved=2ahUKEwik98zesY_9AhXUXaQEHZqeBho4ChDw0wN6BAgEEBc&biw=1280&bih=600&dpr=1","https://www.google.com/search?q="+term+"&sxsrf=AJOqlzWbZhBOERB6ACmY6z-A1trOAj6I0g:1676184468546&ei=lIvoY6TdINS7kdUPmr2a0AE&start=20&sa=N&ved=2ahUKEwik98zesY_9AhXUXaQEHZqeBho4ChDw0wN6BAgEEBc&biw=1280&bih=600&dpr=1"]
          for p in url:
-             response = requests.get(p)
+             response = requests.get(p, verify=False)
              soup = BeautifulSoup(response.text, "html.parser")
              title = (soup.find_all("a"))
              body = (soup.find_all("span"))
