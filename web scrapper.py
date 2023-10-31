@@ -23,10 +23,8 @@ while(choice != 3):
                      if(tag['name'] == "Gender"):
                          # print(f"{tag['name']}: {tag['value']}")
                          if "checked" in tag.attrs:
-                             # print(f"{tag['name']}: {tag['value']}")
                              print(tag['name'], ":", tag['value'])
                      else:
-                         # print(f"{tag['name']}: {tag['value']}")
                          print(tag['name'], ":", tag['value'])
     elif(choice == 2):
          term = input("Enter the keyword to search: ")
